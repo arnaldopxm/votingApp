@@ -1,0 +1,29 @@
+doctype html
+html
+	head
+		title Voting App
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
+	body
+		//- Navbar
+		nav.navbar.navbar-inverse
+			div.container-fluid
+				div.mavbar-header
+					a.navbar-brand(href="/") Voting App
+				
+				ul.nav.navbar-nav
+					li.active
+						a(href="#") Page1
+				
+				ul.nav.navbar-nav.navbar-right
+					li
+						a(href="#")
+							span.glyphicon.glyphicon-log-in
+							= 'Login'
+		//- Navbar End
+		block content
+			
+	//- Scripts
+	script(src='/javascripts/bootstrap.min.js')
+	script(src='/javascripts/jquery.js')
