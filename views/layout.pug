@@ -1,4 +1,5 @@
 doctype html
+block variables
 html
 	head
 		title Voting App
@@ -11,19 +12,23 @@ html
 			div.container-fluid
 				div.mavbar-header
 					a.navbar-brand(href="/") Voting App
-				
+
 				ul.nav.navbar-nav
 					li.active
 						a(href="#") Page1
-				
+
 				ul.nav.navbar-nav.navbar-right
 					li
-						a(href="#")
-							span.glyphicon.glyphicon-log-in
-							= 'Login'
+						if isLogged
+							a(href="/logout")
+								span.glyphicon.glyphicon-log-out
+									= ' Logout'
+						else
+							a(href="/login")
+								span.glyphicon.glyphicon-log-in
+									= ' Login'
 		//- Navbar End
 		block content
-			
 	//- Scripts
 	script(src='/javascripts/bootstrap.min.js')
 	script(src='/javascripts/jquery.js')
