@@ -79,17 +79,3 @@ router.post '/:pid', (req,res,next) ->
 
 
 module.exports = router;
-
-require('plotly')('arnaldopxm', '9qNG0DzU8ZxV9cXxdKhF');
-
-var data = [
-  {
-    x: ["giraffes", "orangutans", "monkeys"],
-    y: [20, 14, 23],
-    type: "bar"
-  }
-];
-var graphOptions = {filename: "basic-bar", fileopt: "overwrite"};
-plotly.plot(data, graphOptions, function (err, msg) {
-    console.log(msg);
-});
