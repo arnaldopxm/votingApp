@@ -1,0 +1,25 @@
+extends layout
+
+block content
+	h1= data.question
+
+	div.container
+		form(method='post')
+			select(name='answer')
+				option(selected disabled) Choose Wisely
+				each val,index in data.answers
+					option(value=val.opt)=val.opt
+				option other
+				input(type='text',name='other')
+
+			input.btn.btn-primary(type="submit" value='Vote!')
+
+	div.container
+			h2 Results
+			ul
+				each val in data.answers
+					li= val.opt + ': ' + val.votes + ' votes.'
+	
+	if data.own != 'false'
+		a(href=data.pid+'/del')
+			button.btn.btn-danger eliminar

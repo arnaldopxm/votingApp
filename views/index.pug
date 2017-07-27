@@ -1,6 +1,8 @@
 extends layout
 
 block content
-	h1= title
-	p Welcome to #{title}
-	p= auth
+	h1 Voting Machine
+	h2 Polls
+	each elem in data
+		li
+			a(href='/polls/'+elem._id)= elem.question

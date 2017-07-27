@@ -2,10 +2,14 @@
 
 ## Commit History:
 
-### 0.0.0
-+ Added `auth` features with passport.
-+ Added mongoose `users` module.
+### 1.0.0
++ Can create and delete polls.
++ Can vote on polls.
 
 ### 0.1.0
 + Passport working with github.
 + Fixed routing system.
+
+### 0.0.0
++ Added `auth` features with passport.
++ Added mongoose `users` module.

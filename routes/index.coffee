@@ -1,7 +1,10 @@
 express = require 'express'
 router = express.Router()
-
+Poll = require '../models/polls'
 passportGithub = require '../auth/github'
+
+all = require './all'
+myPolls = require './polls'
 
 router.use (req, res, next) ->
 	if req.isAuthenticated()
@@ -11,11 +14,7 @@ router.use (req, res, next) ->
 	next()
 
 # GET home page.
-router.get '/', (req, res, next) ->
-	res.render 'index', { title: 'Express' }
-
-router.get '/users', (req, res, next) ->
-	res.send 'respond with a resource'
+router.use '/', all
 
 router.get '/login', (req, res, next) ->
 	res.render 'login'
@@ -23,10 +22,12 @@ router.get '/login', (req, res, next) ->
 router.get '/auth/github', passportGithub.authenticate('github', scope: [ 'user:email' ])
 
 router.get '/auth/github/callback', passportGithub.authenticate('github', failureRedirect: '/login'), (req, res) ->
-	res.redirect '/'
+	res.redirect '/polls/me'
 
 router.get '/logout', (req,res) ->
 	req.logout()
 	res.redirect '/'
+
+router.use '/polls', myPolls
 
 module.exports = router

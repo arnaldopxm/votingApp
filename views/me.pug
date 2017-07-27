@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	h1 My Polls
+	a(href='/polls/new')
+		h2 New Poll
+	ul
+		each elem in data
+			li 
+				a(href='/polls/'+elem._id)= elem.question

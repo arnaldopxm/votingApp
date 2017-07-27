@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	h1 new Poll
+
+	div.container
+		form#pform(method='post')
+			input(type='text' name='title')
+			textarea(form='pform' name='opts' rows=8)
+			input.btn.btn-primary(type="submit" value='Ask It!')
