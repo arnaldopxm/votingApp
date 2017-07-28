@@ -44,6 +44,7 @@ router.get '/:pid', (req,res,next) ->
 		_id : pid
 
 	Poll.findOne searchQuery, (err,data) ->
+		next();return if err
 		owner = if req.isAuthenticated() then req.user.someID else null
 		isOwner = String owner == String data.user
 		data.own = isOwner
@@ -75,7 +76,5 @@ router.post '/:pid', (req,res,next) ->
 			upsert : false
 		Poll.findOneAndUpdate searchQuery, updates, options, (err, data) ->
 			res.redirect '/polls/'+pid
-
-
 
 module.exports = router;

@@ -1,3 +1,4 @@
+require('dotenv').config()
 express = require 'express'
 path = require 'path'
 favicon = require 'serve-favicon'
@@ -8,13 +9,15 @@ sassMiddleware = require 'node-sass-middleware'
 passport = require 'passport'
 session = require 'express-session'
 mongoose = require 'mongoose'
+helmet = require 'helmet'
+# csrf = require 'csurf'
 app = express()
 
 # Routes
 routes = require './routes/index'
 
 # mongoose
-mongoose.connect('mongodb://localhost:27017/newApp');
+mongoose.connect(process.env.NODE);
 
 # view engine setup
 app.set 'views', path.join(__dirname, 'views')
@@ -22,6 +25,7 @@ app.set 'view engine', 'pug'
 
 # uncomment after placing your favicon in /public
 # app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use helmet()
 app.use logger 'dev'
 app.use bodyParser.json()
 app.use bodyParser.urlencoded(extended: false)
@@ -29,7 +33,7 @@ app.use cookieParser()
 app.use express.static(path.join(__dirname, 'public'))
 
 app.use session (
-	secret : 'keyboard cat'
+	secret : process.env.SECRET
 	resave : true
 	saveUninitialized : true)
 
