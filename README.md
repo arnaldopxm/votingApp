@@ -1,5 +1,7 @@
 # VOTING APP FCC
 
+[![Known Vulnerabilities](https://snyk.io/test/github/arnaldopxm/votingapp/badge.svg)](https://snyk.io/test/github/arnaldopxm/votingapp)
+
 ## Commit History:
 
 ### 1.0.0
