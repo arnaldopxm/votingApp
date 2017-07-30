@@ -25,10 +25,11 @@ router.get '/:pid/del', redirLog, (req,res,next) ->
 		res.redirect '/polls/me'
 
 # Create a new poll
-router.get '/new', redirLog, (req, res, next) ->
-	res.render 'new'
+router.get '/new', redirLog, csrfProtection, (req, res, next) ->
+	csrfToken = req.csrfToken()
+	res.render 'new', {csrfToken}
 
-router.post '/new', redirLog, (req, res, next) ->
+router.post '/new', redirLog, csrfProtection, (req, res, next) ->
 	user = req.user.someID
 	question = req.body.title
 	opts = req.body.opts.split '\r\n'
@@ -62,7 +63,7 @@ router.post '/:pid', csrfProtection, (req,res,next) ->
 	pid = req.params.pid
 	answer = req.body.answer
 
-	if answer == 'other'
+	if answer == 'none'
 		answer = req.body.other
 		searchQuery =
 			_id : pid

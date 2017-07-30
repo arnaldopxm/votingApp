@@ -1,3 +1,4 @@
+var $ = require('jquery');
 var Chart = require('chart.js');
 var ctx = document.getElementById('my-chart');
 var labels = []
@@ -38,4 +39,47 @@ var myDoughnutChart = new Chart(ctx, {
 	type: 'doughnut',
 	data: data,
 	options: options
+});
+
+function changes(val){
+	if (val == 'Enter Your Own'){
+		$('#g_other').show();
+		if ($('#i_other').val() == ''){
+			$('#submit').prop('disabled',true);
+		}else{
+			$('#submit').prop('disabled',false);
+		}
+	}else if (val == null){
+		$('#g_other').hide();
+		$('#submit').prop('disabled',true);
+	}else{
+		$('#g_other').hide();
+		$('#submit').prop('disabled',false);
+	}
+}
+
+$('#i_other').change(function(){
+	val = $(this).val();
+	if (val == ''){
+		$('#submit').prop('disabled',true);
+	}else{
+		$('#submit').prop('disabled',false);
+	}
+});
+
+$('#i_answer').change(function(){
+	val = $(this).val();
+	changes(val);
+});
+
+$('#delete').click(function(evt){
+	res = confirm("Sure You Want To Delete?");
+	if (!res){
+		evt.preventDefault();
+	}
+});
+
+$(document).ready(function(){
+	val = $('#i_answer').val();
+	changes(val);
 });

@@ -1,7 +1,7 @@
 passport = require('passport')
 GitHubStrategy = require('passport-github2').Strategy
 User = require('../models/user')
-config = require('../_config')
+config = require('../.config')
 init = require('./init')
 
 passport.use new GitHubStrategy({

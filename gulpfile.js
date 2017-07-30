@@ -4,7 +4,18 @@ var gulp = require('gulp'),
 		uglify = require('gulp-uglify'),
 		plumber = require('gulp-plumber'),
 		nodemon = require('gulp-nodemon'),
-		gutil = require('gulp-util');
+		gutil = require('gulp-util'),
+		sass = require('gulp-sass');
+
+// Compile sass
+gulp.task('sass', () => {
+	gulp.src('public/stylesheets/*.sass')
+		.pipe(plumber())
+		// .pipe(sass({outputStyle:'compressed'}))
+		.pipe(sass())
+		.pipe(plumber.stop())
+		.pipe(gulp.dest('public/build'))
+});
 
 // Compile bowerify js
 gulp.task('scripts', () => {
@@ -28,15 +39,16 @@ gulp.task('server', () => {
 		script: 'bin/www',
 		// listen to
 		watch: ["bin/www", "app.coffee", "routes/", "models/", "auth/",
-		"public/javascripts/", "public/javascripts/view/", "gulpfile.js"],
+		"public/javascripts/", "public/javascripts/view/", "gulpfile.js",
+		"public/stylesheets/style.sass"],
 		// extensions
 		ext: 'js coffee',
 		// tasks
-		tasks: ['scripts']
+		tasks: ['sass','scripts']
 	}).on('restart', () => {
 	gulp.src('bin/www')
 	});
 });
 
 // Set default task
-gulp.task('default', ['scripts','server']);
+gulp.task('default', ['sass','scripts','server']);

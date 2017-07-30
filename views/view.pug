@@ -6,37 +6,39 @@ block scripts
 	script(src='/build/view.js')
 
 block content
-	h1= data.question
+	div.container-fluid.jumbotron
+		h1.text-center= data.question
 
-	div.container
-		form(method='post')
+	div.container-fluid.jumbotron
+		div.row
+			div.col-lg-5
+				h2.text-center Share Your Opinion
+				form(method='post' autocomplete='off')
+					div.form-group
+						label(for='i_answer') Select An Answer
+						select.form-control#i_answer(name='answer')
+							option(selected disabled value='zero') Choose Wisely
+							each val,index in data.answers
+								option(value=val.opt)=val.opt
+							option Enter Your Own
 
-			div.form-group
-				label(for='i_answer') Select An Answer
-				select.form-control#i_answer(name='answer')
-					option(selected disabled) Choose Wisely
-					each val,index in data.answers
-						option(value=val.opt)=val.opt
-					option other
+					div#g_other.form-group(hidden)
+						input(type='hidden',name='_csrf',value=csrfToken)
+						label(for='i_other') Enter Your Other Option
+						input.form-control#i_other(type='text',name='other')
+					
+					input#submit.btn.btn-block.btn-primary(type="submit" value='Vote!')
 
-			div.form-group
-				input(type='hidden',name='_csrf',value=csrfToken)
-				label(for='i_other') Enter Your Other Option
-				input.form-control#i_other(type='text',name='other')
+					if data.own != 'false'
+						a(href=data.pid+'/del')
+							button#delete.btn.btn-block.btn-danger Delete
 
-			input.btn.btn-primary(type="submit" value='Vote!')
+			div.col-lg-7
+				h2.text-center Results
+				canvas#my-chart(style='width:400px;height:auto;')
 
-	div.container
-			h2 Results
-			ul
-				each val in data.answers
-					li= val.opt + ': ' + val.votes + ' votes.'
-
-	canvas#my-chart(style='width:400px;height:auto;')
-		
-	a(href="https://twitter.com/intent/tweet?text="+data.question+" Answer right here:&url="+data.url target="_blank")
-		button.btn.btn-primary Tweet It!
-
-	if data.own != 'false'
-		a(href=data.pid+'/del')
-			button.btn.btn-danger eliminar
+		div.row
+			div.col-lg-4.col-lg-offset-4
+				a(href="https://twitter.com/intent/tweet?text="+data.question+" Answer right here:&url="+data.url target="_blank")
+					button.btn-block.btn.btn-primary 
+						= 'Tweet It!'

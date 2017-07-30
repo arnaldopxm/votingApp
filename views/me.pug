@@ -1,10 +1,12 @@
 extends layout
 
 block content
-	h1 My Polls
-	a(href='/polls/new')
-		h2 New Poll
-	ul
-		each elem in data
-			li 
-				a(href='/polls/'+elem._id)= elem.question
+	div.container-fluid
+		div.jumbotron
+			h1.text-center My Polls
+
+	div.container-fluid
+		div.jumbotron
+			div.list-group
+				each elem in data
+					a.list-group-item.text-center(href='/polls/'+elem._id)= elem.question

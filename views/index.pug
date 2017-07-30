@@ -1,8 +1,13 @@
 extends layout
 
 block content
-	h1 Voting Machine
-	h2 Polls
-	each elem in data
-		li
-			a(href='/polls/'+elem._id)= elem.question
+	div.container-fluid
+		div.jumbotron
+			h1.text-center Voting Machine
+			h2.text-center Start Voting!
+	
+	div.container-fluid
+		div.jumbotron
+			div.list-group
+				each elem in data
+					a.text-center.list-group-item(href='/polls/'+elem._id)= elem.question

@@ -1,6 +1,21 @@
 extends layout
 
 block content
-	a.btn.btn-primary(href='/auth/github')
-		='GitHub '
-		i.fa.fa-github
+	div.container-fluid
+		div.jumbotron
+			h1.text-center Please Login to Continue
+
+	div.container-fluid
+		div.jumbotron
+			div.row
+				div.col-lg-4.col-lg-offset-4
+					a(href='/auth/github')
+						button.btn.btn-primary.btn-lg.btn-block
+							i.fa.fa-github.fa-2x
+							=' GitHub Login'
+			div.row
+				div.col-lg-4.col-lg-offset-4
+					a(href='/auth/github')
+						button.btn.btn-primary.btn-lg.btn-block
+							i.fa.fa-twitter.fa-2x
+							=' Twitter Login'

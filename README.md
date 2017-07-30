@@ -4,6 +4,10 @@
 
 ## Commit History:
 
+### 3.0.0
++ Completed user histories.
++ Fixed Front End
+
 ### 2.0.0
 + Added Tweeting.
 + Added Gulp.

@@ -1,33 +1,70 @@
 doctype html
 html
 	head
-		title Voting App
-		link(rel='stylesheet', href='/stylesheets/style.css')
+		title Voting Machine
+		link(rel='stylesheet', href='/build/style.css')
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
 	body
 		//- Navbar
-		nav.navbar.navbar-inverse
+		nav.navbar.navbar-inverse.navbar-fixed-top
 			div.container-fluid
 				div.mavbar-header
-					a.navbar-brand(href="/") Voting App
-
+					a.navbar-brand Voting Machine
+					
 				ul.nav.navbar-nav
-					li.active
-						a(href="#") Page1
+					li
+						a(href='/') Home
+
+				if isLogged
+					ul.nav.navbar-nav
+						li
+							a(href="/polls/me") My Polls
+					ul.nav.navbar-nav
+						li
+							a(href="/polls/new") New Poll
 
 				ul.nav.navbar-nav.navbar-right
-					li
-						if isLogged
+					if isLogged
+						li
 							a(href="/logout")
 								span.glyphicon.glyphicon-log-out
 									= ' Logout'
-						else
-							a(href="/login")
+					else
+						li.dropdown
+							a.dropdown-toggle(href="#" data-toggle="dropdown" role="button") 
 								span.glyphicon.glyphicon-log-in
-									= ' Login'
+								= ' Login'
+								ul.dropdown-menu
+									li
+										a(href="/auth/github") 
+											i.fa.fa-github.fa-2x
+											= ' Github Login'
+									li.divider(role="separator")
+									li
+										a(href="/auth/twitter")
+											i.fa.fa-twitter.fa-2x
+											= ' Twitter Login'
+
 		//- Navbar End
 		block content
+			
+		//- Footer
+		div.container-fluid
+			div.col-lg-4.col-lg-offset-4
+				footer.fixed-bottom
+					p.text-center Developed by Arnaldo Quintero.
+					div.row.text-center
+						div.col-md-4
+							a(href='https://twitter.com/kutuplaa',target='_blank')
+								i.fa.fa-twitter-square.fa-2x
+						div.col-md-4
+							a(href='https://github.com/arnaldopxm', target='_blank')
+								i.fa.fa-github.fa-2x
+						div.col-md-4
+							a(href='https://ve.linkedin.com/in/arnaldo-quintero-segura-306750124',target='_blank')
+								i.fa.fa-linkedin-square.fa-2x
+
 	//- Scripts
 	script(src='/javascripts/jquery.js')
 	script(src='/javascripts/bootstrap.min.js')
