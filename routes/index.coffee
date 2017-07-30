@@ -32,7 +32,7 @@ router.get '/auth/github/callback', passportGithub.authenticate('github', failur
 router.get '/auth/twitter', passportTwitter.authenticate('twitter')
 
 # Twitter Callback
-router.get 'auth/twitter/callback', passportTwitter.authenticate('twitter', failureRedirect: '/login'), (req, res) ->
+router.get '/auth/twitter/callback', passportTwitter.authenticate('twitter', failureRedirect: '/login'), (req, res) ->
 	res.redirect '/polls/me'
 
 # Logout
