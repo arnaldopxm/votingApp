@@ -10,14 +10,15 @@ passport = require 'passport'
 session = require 'express-session'
 mongoose = require 'mongoose'
 helmet = require 'helmet'
-# csrf = require 'csurf'
+RateLimit = require 'express-rate-limit'
 app = express()
 
 # Routes
 routes = require './routes/index'
 
 # mongoose
-mongoose.connect(process.env.NODE);
+mongoose.Promise = global.Promise
+mongoose.connect(process.env.NODE,{ useMongoClient : true });
 
 # view engine setup
 app.set 'views', path.join(__dirname, 'views')
@@ -34,7 +35,9 @@ app.use express.static(path.join(__dirname, 'public'))
 
 app.use session (
 	secret : process.env.SECRET
+	# secure : true
 	resave : true
+	# httpOnly : true
 	saveUninitialized : true)
 
 # passport config

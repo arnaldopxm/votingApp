@@ -1,5 +1,10 @@
 extends layout
 
+block scripts
+	script.
+		var info=!{JSON.stringify(data)};
+	script(src='/build/view.js')
+
 block content
 	h1= data.question
 
@@ -10,6 +15,7 @@ block content
 				each val,index in data.answers
 					option(value=val.opt)=val.opt
 				option other
+				input(type='hidden',name='_csrf',value=csrfToken)
 				input(type='text',name='other')
 
 			input.btn.btn-primary(type="submit" value='Vote!')
@@ -19,7 +25,9 @@ block content
 			ul
 				each val in data.answers
 					li= val.opt + ': ' + val.votes + ' votes.'
-	
+
+	canvas#my-chart(style='width:400px;height:auto;')
+
 	if data.own != 'false'
 		a(href=data.pid+'/del')
 			button.btn.btn-danger eliminar

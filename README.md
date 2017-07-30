@@ -4,6 +4,11 @@
 
 ## Commit History:
 
+### 2.0.0
++ Added Gulp.
++ Added bowerify.
++ Added chart views.
+
 ### 1.0.0
 + Can create and delete polls.
 + Can vote on polls.

@@ -1,12 +1,15 @@
 express = require 'express'
-router = express.Router()
+csrf = require('csurf')
 Poll = require '../models/polls'
+router = express.Router()
 
 redirLog = (req,res,next) ->
 	if req.isAuthenticated()
 		next()
 	else
 		res.redirect '/login'
+
+csrfProtection = csrf(cookie:true)
 
 # See my polls
 router.get '/me', redirLog, (req, res, next) ->
@@ -38,20 +41,23 @@ router.post '/new', redirLog, (req, res, next) ->
 
 
 # Vote on a poll
-router.get '/:pid', (req,res,next) ->
+router.get '/:pid', csrfProtection, (req,res,next) ->
 	pid = req.params.pid
 	searchQuery =
 		_id : pid
 
 	Poll.findOne searchQuery, (err,data) ->
-		next();return if err
+		if err
+			next()
+			return
 		owner = if req.isAuthenticated() then req.user.someID else null
 		isOwner = String owner == String data.user
 		data.own = isOwner
 		data.pid = pid
-		res.render 'view', {data}
+		csrfToken = req.csrfToken()
+		res.render 'view', {data,csrfToken}
 
-router.post '/:pid', (req,res,next) ->
+router.post '/:pid', csrfProtection, (req,res,next) ->
 	pid = req.params.pid
 	answer = req.body.answer
 
