@@ -5,6 +5,7 @@
 ## Commit History:
 
 ### 2.0.0
++ Added Tweeting.
 + Added Gulp.
 + Added bowerify.
 + Added chart views.

@@ -35,9 +35,9 @@ app.use express.static(path.join(__dirname, 'public'))
 
 app.use session (
 	secret : process.env.SECRET
-	# secure : true
+	secure : true
 	resave : true
-	# httpOnly : true
+	httpOnly : true
 	saveUninitialized : true)
 
 # passport config

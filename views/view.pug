@@ -10,13 +10,19 @@ block content
 
 	div.container
 		form(method='post')
-			select(name='answer')
-				option(selected disabled) Choose Wisely
-				each val,index in data.answers
-					option(value=val.opt)=val.opt
-				option other
+
+			div.form-group
+				label(for='i_answer') Select An Answer
+				select.form-control#i_answer(name='answer')
+					option(selected disabled) Choose Wisely
+					each val,index in data.answers
+						option(value=val.opt)=val.opt
+					option other
+
+			div.form-group
 				input(type='hidden',name='_csrf',value=csrfToken)
-				input(type='text',name='other')
+				label(for='i_other') Enter Your Other Option
+				input.form-control#i_other(type='text',name='other')
 
 			input.btn.btn-primary(type="submit" value='Vote!')
 
@@ -27,6 +33,9 @@ block content
 					li= val.opt + ': ' + val.votes + ' votes.'
 
 	canvas#my-chart(style='width:400px;height:auto;')
+		
+	a(href="https://twitter.com/intent/tweet?text="+data.question+" Answer right here:&url="+data.url target="_blank")
+		button.btn.btn-primary Tweet It!
 
 	if data.own != 'false'
 		a(href=data.pid+'/del')

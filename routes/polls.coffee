@@ -52,6 +52,7 @@ router.get '/:pid', csrfProtection, (req,res,next) ->
 			return
 		owner = if req.isAuthenticated() then req.user.someID else null
 		isOwner = String owner == String data.user
+		data.url = process.env.HOST + 'polls/' + pid
 		data.own = isOwner
 		data.pid = pid
 		csrfToken = req.csrfToken()
