@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -33,9 +35,11 @@
     "passport-github2": "^0.1.10",
     "passport-twitter": "^1.0.4",
     "pug": "~2.0.0-beta11",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "snyk": "^1.52.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1"
-  }
+  },
+  "snyk": true
 }
